@@ -4,6 +4,13 @@
         require: 'ngModel',
         link: function (scope, element, attrs, ngModelCtrl) {
             $(function () {
+
+
+                ngModelCtrl.$formatters.unshift(function (a) {
+                    return $filter('date')(ngModelCtrl.$modelValue, 'dd/MM/yyyy');
+                });
+    
+
                 element.datepicker({
                     changeMonth: true,
                     changeYear: true,
