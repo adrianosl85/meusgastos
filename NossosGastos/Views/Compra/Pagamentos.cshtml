@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Compras";
+}
+
+<div ng-controller="PagamentoController">
+
+    <h2 style="text-align:center; padding:5px;">
+        Pagamentos de
+        <a class="btn" style="margin-top:-10px;" ng-click="changeDataFiltro(-1)"><i class="icon-chevron-left"></i></a>
+        <select ng-model="mes" style="width:110px;" ng-change="filtrar()" ng-options="mes.id as mes.nome for mes in meses"></select>
+        /
+        <input type="number" class="input-mini" ng-change="filtrar()" ng-model="ano" maxlength="4" />
+        <a class="btn" style="margin-top:-10px;" ng-click="changeDataFiltro(1)"><i class="icon-chevron-right"></i></a>
+    </h2>
+
+    <div ng-style="carregado" style="display:none;">
+        <a class="btn btn-large" style="margin-bottom:20px;" href="/Compra/NovaCompra">
+            <i class="icon-shopping-cart"></i>
+            <span>Adicionar nova compra</span>
+        </a>
+
+        <div>
+            <div class="alert alert-success" ng-show="pegaParcelasVencendo().quantidade>0">
+                <ng-pluralize count="pegaParcelasVencendo().quantidade" when="{
+                          '0' : 'teste',
+                          '1' : '1 parcela para vencer | {{pegaParcelasVencendo().soma|currency:moeda}}  de redução para o próximo mês',
+                          'other' : '{{pegaParcelasVencendo().quantidade}} parcelas para vencer | {{pegaParcelasVencendo().soma|currency:moeda}}  de redução para o próximo mês'
+                          }">
+
+                </ng-pluralize>
+            </div>
+
+            <div class="alert alert-info">
+                Total gasto com <strong>Cartão</strong>: {{pegarTotal().cartao | currency:'R$ ' }}
+            </div>
+
+            <div class="alert alert-info">
+                Total gasto com <strong>Dinheiro</strong>: {{pegarTotal().dinheiro | currency:'R$ ' }}
+            </div>
+
+            <div class="alert alert-info">
+                Total gasto com <strong>Ticket</strong>: {{pegarTotal().ticket | currency:'R$ ' }}
+            </div>
+        </div>
+
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <span style="cursor:pointer;" ng-click="sort= sort== '+Compra.Nome' ? '-Compra.Nome' : '+Compra.Nome' ">
+                            Produto
+                            <i ng-show="sort=='+Compra.Nome'" class="icon-chevron-up"></i>
+                            <i ng-show="sort=='-Compra.Nome'" class="icon-chevron-down"></i>
+                        </span>
+                        @*<input type="text" ng-model="filterNome" ng-init="filterNome=''" style="display:block;" />*@
+                    </th>
+                    <th>
+                        <span style="cursor:pointer;" ng-click="sort= sort== '+Valor' ? '-Valor' : '+Valor' ">
+                            Valor
+                            <i ng-show="sort=='+Valor'" class="icon-chevron-up"></i>
+                            <i ng-show="sort=='-Valor'" class="icon-chevron-down"></i>
+
+                        </span>
+                        @*<input type="text" ng-model="filterValor" style="display:block;" />*@
+                    </th>
+                    <th>
+                        <span style="cursor:pointer;" ng-click="sort= sort== '+Compra.Parcelas' ? '-Compra.Parcelas' : '+Compra.Parcelas' ">
+                            Parcela
+                            <i ng-show="sort=='+Compra.Parcelas'" class="icon-chevron-up"></i>
+                            <i ng-show="sort=='-Compra.Parcelas'" class="icon-chevron-down"></i>
+                        </span>
+                        @*<input type="text" ng-model="filterParcelas"  style="display:block;" />*@
+                    </th>
+                    <th>
+                        <span style="cursor:pointer;" ng-click="sort= sort== '+Compra.DataCompra' ? '-Compra.DataCompra' : '+Compra.DataCompra' ">
+                            Data da Compra
+                            <i ng-show="sort=='+Compra.DataCompra'" class="icon-chevron-up"></i>
+                            <i ng-show="sort=='-Compra.DataCompra'" class="icon-chevron-down"></i>
+                        </span>
+                        @*<input type="text" ngc-datepicker ng-model="filterDataCompra" style="display:block;" />*@
+                    </th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pagamento in pagamentos | orderBy:sort" ng-class="pegaClasse(pagamento)">
+                    <td>{{pagamento.Compra.Nome}}</td>
+                    <td>{{pagamento.Valor|currency:'R$ '}}</td>
+                    <td>{{pagamento.Parcela < 10 ? '0'+pagamento.Parcela : pagamento.Parcela}}/{{pagamento.Compra.Parcelas < 10 ? '0'+pagamento.Compra.Parcelas: pagamento.Compra.Parcelas}}</td>
+                    <td>{{pagamento.Compra.DataCompra|date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <a class="btn" href="/compra/novacompra?compraID={{pagamento.CompraID}}"><i class="icon-edit"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/Angular/Models/Pagamento/pagamento-controller.js"></script>
+}

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+</head>
+<body ng-app="PessiApp">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Pessi.com</a>
+            <ul class="nav">
+                <li class="active"><a href="/Compra/Compras" class="success">Pagamentos</a></li>
+                <li><a href="/Compra/Compras">Compras</a></li>
+                <li><a href="#">Data de Vencimento</a></li>
+                <li><a href="#">Cartões</a></li>
+            </ul>
+        </div>
+    </div>
+    @RenderBody()
+    <script src="~/Scripts/utilitarios.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-ui-1.11.2.min.js"></script>
+    <script src="~/Scripts/jquery.price_format.2.0.min.js"></script>
+    <script src="~/Scripts/datepicker-ptBr.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/i18n/angular-locale_pt-br.js"></script>
+    <script src="~/Scripts/Angular/CustomDirectives/datepicker.js"></script>
+    <script src="~/Scripts/Angular/CustomDirectives/CurrencyInput.js"></script>
+    <script src="~/Scripts/Angular/Apps/compras.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
