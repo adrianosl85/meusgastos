@@ -31,11 +31,13 @@
                 <input class="span2 data" ng-model="compra.DataCompra" onkeydown="return false;" ng-change="dataChange()" ngc-datepicker name="DataCompra" type="text" placeholder="Data da Compra">
             </div>
         </div>
-
+        <span>
+            {{intFormaPagamento|json}}
+        </span>
         <div style="padding:5px;">
             <div class="input-append input-prepend">
                 <span class="add-on">?</span>
-                <select ng-model="compra.FormaPagamento" ng-change="gerarParcelas()" ng-init="compra.FormaPagamento=1" ng-options="formaPagamento.id as formaPagamento.forma for formaPagamento in formasPagamento"></select>
+                <select ng-model="compra.FormaPagamento"  ng-change="gerarParcelas()" ng-options="formaPagamento.Nome for formaPagamento in formasPagamento|orderBy:'+Nome'"></select>
                 <span class="add-on" ng-show="compra.FormaPagamento==1"> <label><input type="checkbox" ng-model="compra.VirouCartao" ng-change="gerarParcelas()" /> virou o cartão</label></span>
             </div>
         </div>

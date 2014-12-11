@@ -1,12 +1,10 @@
-﻿using NossosGastos.Entidades;
-using System;
-using System.Collections.Generic;
+﻿using NossosGastos.Abstratos;
+using NossosGastos.Entidades;
 using System.Linq;
-using System.Web;
 
-namespace NossosGastos.Concretos
+namespace NossosGastos.EFContext
 {
-    public class EFPagamentoRepository
+    public class EFPagamentoRepository : IPagamentoRepository
     {
         private readonly EFDBContas context;
         public EFPagamentoRepository()
@@ -14,9 +12,9 @@ namespace NossosGastos.Concretos
             context = new EFDBContas();
         }
 
-        public ICollection<Pagamento> Pagamentos { get { return context.Pagamentos.Include("compra").ToList(); } }
-        public void Add(Pagamento pagamento){
-            var dbPagamento = PegarID(pagamento.PagamentoID);
+        public IQueryable<Pagamento> Pagamentos { get { return context.Pagamentos; } }
+        public void Salvar(Pagamento pagamento){
+            var dbPagamento = PegarPorID(pagamento.PagamentoID);
 
             if(dbPagamento==null)
                 context.Pagamentos.Add(pagamento);
@@ -26,7 +24,7 @@ namespace NossosGastos.Concretos
             context.SaveChanges();
         }
         
-        public Pagamento PegarID(int pagamentoID)
+        public Pagamento PegarPorID(int pagamentoID)
         {
             return Pagamentos.FirstOrDefault(x => x.PagamentoID == pagamentoID);
         }

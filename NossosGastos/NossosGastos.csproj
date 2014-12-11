@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator.SimpleInjectorAdapter">
+      <HintPath>..\packages\CommonServiceLocator.SimpleInjectorAdapter.2.6.1\lib\portable-net4+sl4+wp8+win8+wpa81\CommonServiceLocator.SimpleInjectorAdapter.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
@@ -48,6 +51,10 @@
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\net35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.6.9.5\lib\net45\MySql.Data.dll</HintPath>
@@ -55,6 +62,18 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.Entity.6.9.5\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.2.6.1\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Diagnostics">
+      <HintPath>..\packages\SimpleInjector.2.6.1\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.2.6.1\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.2.6.1\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -134,15 +153,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstratos\ICompraRepository.cs" />
+    <Compile Include="Abstratos\IFormaPagamentoRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Concretos\EFFormaPagamentoRepository.cs" />
     <Compile Include="Concretos\EFPagamentoRepository.cs" />
     <Compile Include="Concretos\EFCompraRepository.cs" />
-    <Compile Include="Concretos\EFDBContas.cs" />
+    <Compile Include="EFContext\EFDBContas.cs" />
+    <Compile Include="Abstratos\IPagamentoRepository.cs" />
     <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\FormaPagamentoController.cs" />
+    <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Entidades\Compra.cs" />
+    <Compile Include="Entidades\FormaPagamento.cs" />
     <Compile Include="Entidades\Pagamento.cs" />
     <Compile Include="Extensoes\Serializar.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,6 +177,7 @@
     <Compile Include="Mapeamentos\CompraMap.cs" />
     <Compile Include="Mapeamentos\PagamentoMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bootstrap\css\bootstrap-responsive.css" />
@@ -1043,11 +1070,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Compra\NovaCompra.cshtml" />
-    <Content Include="Views\Compra\Pagamentos.cshtml" />
     <Content Include="Views\Compra\Compras.cshtml" />
+    <Content Include="Views\Pagamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstratos\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

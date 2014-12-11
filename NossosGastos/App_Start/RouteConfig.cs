@@ -16,7 +16,7 @@ namespace NossosGastos
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Compra", action = "Pagamentos", id = UrlParameter.Optional }
+                defaults: new { controller = "Pagamento", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

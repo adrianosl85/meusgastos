@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using CommonServiceLocator.SimpleInjectorAdapter;
+using Microsoft.Practices.ServiceLocation;
+using SimpleInjector;
+using SimpleInjector.Integration.Web.Mvc;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -16,6 +16,12 @@ namespace NossosGastos
     {
         protected void Application_Start()
         {
+
+            var container = new Container();
+            ServiceLocator.SetLocatorProvider(() => new SimpleInjectorServiceLocatorAdapter(container));
+            Registrator.Register(container);
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

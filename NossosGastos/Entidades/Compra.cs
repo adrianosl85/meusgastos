@@ -16,19 +16,14 @@ namespace NossosGastos.Entidades
         public double Total { get; set; }
         public DateTime DataCompra { get; set; }
         public int Parcelas { get; set; }
-        public FormasPagamento FormaPagamento { get; set; }
+        public int FormaPagamentoID { get; set; }
+        [ForeignKey("FormaPagamentoID")]
+        public FormaPagamento FormaPagamento { get; set; }
         public ICollection<Pagamento> Pagamentos { get; set; }
         public bool VirouCartao { get; set; }
         public Compra()
         {
             Pagamentos = new HashSet<Pagamento>();
         }
-    }
-
-    public enum FormasPagamento
-    {
-        Cartao = 1,
-        Dinheiro = 2,
-        Ticket = 3
     }
 }

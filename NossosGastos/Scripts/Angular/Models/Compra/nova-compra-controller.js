@@ -16,12 +16,14 @@
                 .then(onSucess);
 
 
+        var onPegaFormaPagametnoComplete = function (response) {
+            $scope.formasPagamento = response.data;
+            $scope.compra.FormaPagamento = $scope.formasPagamento[0];
+        };
 
-        $scope.formasPagamento = [{ forma: "Cartão", id: 1 },
-            { forma: "Dinheiro", id: 2 },
-            { forma: "Ticket", id: 3 }]
-
-
+        $http.get("/FormaPagamento/PegaFormasPagamento")
+            .then(onPegaFormaPagametnoComplete);
+        
         $scope.mudaValorTotal = function () {
             var parcelas = angular.isDefined($scope.compra.Parcelas) ? $scope.compra.Parcelas : 1;
 
@@ -53,8 +55,8 @@
         };
 
         $scope.dataChange = function () {
-            if ($scope.compra.FormaPagamento == 1)
-                if ($scope.compra.DataCompra.getDate() > 9) {
+            if ($scope.compra.FormaPagamento.TemVencimetno)
+                if ($scope.compra.DataCompra.getDate() > $scope.compra.FormaPagamento.DiaVencimento) {
                     $scope.compra.VirouCartao = true;
                 } else {
                     $scope.compra.VirouCartao = false;
@@ -72,11 +74,11 @@
 
             var dataVencimentoBase = angular.isDefined($scope.compra.DataCompra) ? new Date($scope.compra.DataCompra) : '';
 
-            if (angular.isDate(dataVencimentoBase) && $scope.compra.FormaPagamento == 1) {
+            if (angular.isDate(dataVencimentoBase) && $scope.compra.FormaPagamento.TemVencimetno ) {
 
                 dataVencimentoBase.setMonth($scope.compra.VirouCartao ? (dataVencimentoBase.getMonth() + 1) : dataVencimentoBase.getMonth());
 
-                dataVencimentoBase.setDate(9);
+                dataVencimentoBase.setDate($scope.compra.FormaPagamento.DiaVencimento);
             }
 
             for (var i = 0; i < parcelas; i++) {
@@ -95,7 +97,7 @@
         };
 
         $scope.voltar = function () {
-            window.location.href = "/compra/pagamentos";
+            window.location.href = "/Pagamento/pagamentos";
         };
 
         var onSalvarCompraComplete = function (response) {

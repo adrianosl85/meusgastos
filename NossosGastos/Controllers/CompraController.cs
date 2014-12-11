@@ -1,4 +1,4 @@
-﻿using NossosGastos.Concretos;
+﻿using NossosGastos.EFContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,7 @@ using System.Transactions;
 using System.Web.Mvc;
 using NossosGastos.Extensoes;
 using NossosGastos.Entidades;
+using NossosGastos.Abstratos;
 
 namespace NossosGastos.Controllers
 {
@@ -15,13 +16,14 @@ namespace NossosGastos.Controllers
         //
         // GET: /Compra/
 
-        private readonly EFCompraRepository compraRepository;
-        private readonly EFPagamentoRepository pagamentoRepository;
+        private readonly ICompraRepository compraRepository;
+        private readonly IPagamentoRepository pagamentoRepository;
 
-        public CompraController()
+        public CompraController(ICompraRepository compraRepository
+            , IPagamentoRepository pagamentoRepository)
         {
-            this.compraRepository = new EFCompraRepository();
-            this.pagamentoRepository = new EFPagamentoRepository();
+            this.compraRepository = compraRepository;
+            this.pagamentoRepository = pagamentoRepository;
         }
 
         public ActionResult Index()
@@ -38,7 +40,7 @@ namespace NossosGastos.Controllers
         [HttpPost]
         public string PegaCompraById(int compraID)
         {
-            return compraRepository.PegarID(compraID).ToJson();
+            return compraRepository.PegarPorID(compraID).ToJson();
         }
 
         [HttpPost]
@@ -55,15 +57,12 @@ namespace NossosGastos.Controllers
         [HttpPost]
         public ActionResult DeletarCompra(int compraID)
         {
-            compraRepository.RemoverCompra(compraID);
+            compraRepository.RemoverFormaPagamento(compraID);
 
-            return Json(new { success = true, urlRedirect = "/Compra/Pagamentos" });
+            return Json(new { success = true, urlRedirect = "/Pagamento/Pagamentos" });
         }
 
-        public ActionResult Pagamentos()
-        {
-            return View();
-        }
+
 
         public ActionResult Compras()
         {
@@ -74,12 +73,6 @@ namespace NossosGastos.Controllers
         public string PegaCompras(Filter filtro)
         {
             return new Compra().ToJson();
-        }
-
-        [HttpGet]
-        public string PegarPagamentos(int mes, int ano)
-        {
-            return pagamentoRepository.Pagamentos.ToList().Where(x=>x.DataVencimento.Month == mes && x.DataVencimento.Year == ano).ToJson();
         }
 
         public class Filter

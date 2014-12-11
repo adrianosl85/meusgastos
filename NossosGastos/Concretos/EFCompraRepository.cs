@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using NossosGastos.Abstratos;
 
-namespace NossosGastos.Concretos
+namespace NossosGastos.EFContext
 {
-    public class EFCompraRepository
+    public class EFCompraRepository : ICompraRepository
     {
         private readonly EFDBContas context;
         public EFCompraRepository()
@@ -15,11 +16,17 @@ namespace NossosGastos.Concretos
             context = new EFDBContas();
         }
 
-        public ICollection<Compra> Compras { get { return context.Compras.Include("Pagamentos").AsNoTracking().ToList(); } }
+        public IQueryable<Compra> Compras { get { return context.Compras; } }
         public void Salvar(Compra compra){
-            var dbCompra = PegarID(compra.CompraID);
-            if(dbCompra==null)
+
+            compra.FormaPagamento = context.FormasPagamento.Find(compra.FormaPagamento.FormaPagamentoID);
+
+            var dbCompra = PegarPorID(compra.CompraID);
+            if(dbCompra==null){
+                
                 context.Compras.Add(compra);
+            }
+                
             else
             {
                 foreach (Pagamento remover in dbCompra.Pagamentos.ToList())
@@ -40,9 +47,9 @@ namespace NossosGastos.Concretos
             context.SaveChanges();
         }
 
-        public void RemoverCompra(int compraID)
+        public void RemoverFormaPagamento(int compraID)
         {
-            var dbcompra = PegarID(compraID);
+            var dbcompra = PegarPorID(compraID);
             if (dbcompra != null)
             {
                 foreach (Pagamento pagamento in dbcompra.Pagamentos.ToList())
@@ -55,7 +62,7 @@ namespace NossosGastos.Concretos
 
             context.SaveChanges();
         }
-        public Compra PegarID(int compraID)
+        public Compra PegarPorID(int compraID)
         {
             return context.Compras.Include("Pagamentos").FirstOrDefault(x=>x.CompraID == compraID);
         }

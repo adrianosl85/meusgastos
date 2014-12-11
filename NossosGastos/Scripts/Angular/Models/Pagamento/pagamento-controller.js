@@ -32,9 +32,6 @@
 
         $scope.moeda = "R$ ";
         
-
-        
-
         $scope.sort = "+Compra.Nome";
 
         $scope.changeDataFiltro = function (mes) {
@@ -79,7 +76,7 @@
         $scope.filtrar = function () {
             $scope.carregado = { display: 'none' };
 
-            $http.get("/Compra/PegarPagamentos?mes=" + ($scope.mes+1) + "&ano=" + $scope.ano)
+            $http.get("/Pagamento/PegarPagamentos?mes=" + ($scope.mes+1) + "&ano=" + $scope.ano)
             .then(onPegaPagamentosComplete, onErrorPagamentos);
         };
 
@@ -92,7 +89,7 @@
             };
 
             angular.forEach($scope.pagamentos, function (valor) {
-                if (valor.Compra.FormaPagamento == 1)
+                if (valor.Compra.FormaPagamentoID == 1)
                     soma.cartao += valor.Valor;
                 else if (valor.Compra.FormaPagamento == 2)
                     soma.dinheiro += valor.Valor;
