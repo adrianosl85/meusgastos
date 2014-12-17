@@ -207,8 +207,14 @@
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="htmls\botoesForm.html" />
+    <Content Include="htmls\form.html" />
     <Content Include="Scripts\Angular\CustomDirectives\CurrencyInput.js" />
+    <Content Include="Scripts\Angular\CustomDirectives\defaultForm.js" />
     <Content Include="Scripts\Angular\Models\Compra\compras-controller.js" />
+    <Content Include="Scripts\Angular\Models\FormaPagamento\forma-pagamento-controller.js" />
+    <Content Include="Scripts\Angular\Models\FormaPagamento\forma-pagamento-repos.js" />
+    <Content Include="Scripts\Angular\Models\FormaPagamento\formas-pagamento-controller.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\datepicker-ptBr.js" />
@@ -1069,12 +1075,15 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Compra\NovaCompra.cshtml" />
-    <Content Include="Views\Compra\Compras.cshtml" />
+    <Content Include="Views\Compra\FormCompra.cshtml" />
+    <Content Include="Views\Compra\Index.cshtml" />
     <Content Include="Views\Pagamento\Index.cshtml" />
+    <Content Include="Views\FormaPagamento\FormFormaPagamento.cshtml" />
+    <Content Include="Views\FormaPagamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Infraestrutura\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

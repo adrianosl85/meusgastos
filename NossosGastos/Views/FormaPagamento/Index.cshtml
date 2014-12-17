@@ -1,0 +1,60 @@
+﻿<h1 class="text-center">Formas de Pagamento</h1>
+<div ng-controller="FormasPagamentoController">
+    <table class="table table-responsive table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+Nome' ? '-Nome' : '+Nome' ">
+                        Nome
+                        <i ng-show="sort=='+Nome'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-Nome'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+DiaVencimento' ? '-DiaVencimento' : '+DiaVencimento' ">
+                        Dia de Vencimento
+                        <i ng-show="sort=='+DiaVencimento'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-DiaVencimento'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="formaPagamento in formasPagamento|orderBy:sort">
+                <td>{{formaPagamento.Nome}}</td>
+                <td>{{formaPagamento.DiaVencimento > 0 ? formaPagamento.DiaVencimento : "Não Tem"}}</td>
+                <td>
+                    <a class="btn" href="/FormaPagamento/FormFormaPagamento?formapagamentoid={{formaPagamento.FormaPagamentoID}}">
+                        <i class="icon-edit"></i>
+                    </a>
+                    <a class="btn">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Confirmação Remoção</h3>
+    </div>
+    <div class="modal-body">
+        <p>Deseja realmente remover esta forma de pagamento?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Não</button>
+        <a class="btn btn-primary" ng-click="removerCompra(compra.CompraID)">Sim</a>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Angular/Models/FormaPagamento/forma-pagamento-repos.js"></script>
+    <script src="~/Scripts/Angular/Models/FormaPagamento/formas-pagamento-controller.js"></script>
+}

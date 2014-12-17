@@ -27,17 +27,13 @@ namespace NossosGastos.Controllers
             return View();
         }
 
-        public ActionResult Pagamentos()
-        {
-            return View();
-        }
-
         [HttpGet]
         public string PegarPagamentos(int mes, int ano)
         {
             return pagamentoRepository
                 .Pagamentos
                 .Include(x=>x.Compra)
+                .Include(x=>x.Compra.FormaPagamento)
                 .ToList().Where(x => x.DataVencimento.Month == mes && x.DataVencimento.Year == ano).ToJson();
         }
 

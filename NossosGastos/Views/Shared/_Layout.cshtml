@@ -16,10 +16,9 @@
         <div class="navbar-inner">
             <a class="brand" href="#">Pessi.com</a>
             <ul class="nav">
-                <li class="active"><a href="/Compra/Compras" class="success">Pagamentos</a></li>
-                <li><a href="/Compra/Compras">Compras</a></li>
-                <li><a href="#">Data de Vencimento</a></li>
-                <li><a href="#">Cartões</a></li>
+                <li class="active"><a href="/Pagamento" class="success">Pagamentos</a></li>
+                <li><a href="/Compra">Compras</a></li>
+                <li><a href="/FormaPagamento">Formas de Pagamento</a></li>
             </ul>
         </div>
     </div>
@@ -34,7 +33,9 @@
     <script src="~/Scripts/i18n/angular-locale_pt-br.js"></script>
     <script src="~/Scripts/Angular/CustomDirectives/datepicker.js"></script>
     <script src="~/Scripts/Angular/CustomDirectives/CurrencyInput.js"></script>
+    <script src="~/Scripts/Angular/CustomDirectives/defaultForm.js"></script>
     <script src="~/Scripts/Angular/Apps/compras.js"></script>
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

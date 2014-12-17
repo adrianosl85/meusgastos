@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Compras";
+}
+<h1 style="text-align:center;">Compras</h1>
+<div ng-controller="ComprasController">
+    <a class="btn btn-large" style="margin-bottom:20px;" href="/Compra/FormCompra">
+        <i class="icon-shopping-cart"></i>
+        <span>Adicionar nova compra</span>
+    </a>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+Nome' ? '-Nome' : '+Nome' ">
+                        Nome
+                        <i ng-show="sort=='+Nome'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-Nome'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+Total' ? '-Total' : '+Total' ">
+                        Total
+                        <i ng-show="sort=='+Total'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-Total'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+Parcelas' ? '-Parcelas' : '+Parcelas' ">
+                        Parcelas
+                        <i ng-show="sort=='+Parcelas'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-Parcelas'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+DataCompra' ? '-DataCompra' : '+DataCompra' ">
+                        Data da Compra
+                        <i ng-show="sort=='+DataCompra'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-DataCompra'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+FormaPagamento.Nome' ? '-FormaPagamento.Nome' : '+FormaPagamento.Nome' ">
+                        Forma de Pagamento
+                        <i ng-show="sort=='+FormaPagamento.Nome'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-FormaPagamento.Nome'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="compra in compras|orderBy:sort">
+                <td ng-bind="compra.Nome"></td>
+                <td>{{compra.Total|currency:moeda}} ({{compra.Total/compra.Parcelas|currency:'x'}})</td>
+                <td><span ng-bind="compra.Parcelas"></span>/<span ng-bind="pegaParcelaAtual(compra)"></span></td>
+                <td ng-bind="compra.DataCompra|date:'dd/MM/yyyy'"></td>
+                <td ng-bind="compra.FormaPagamento.Nome"><td>
+                <td><a href="/compra/formcompra?compraid={{compra.CompraID}}" class="btn"><i class="icon-edit"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Angular/Models/Compra/compras-controller.js"></script>
+}

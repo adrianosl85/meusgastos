@@ -1,6 +1,4 @@
-﻿@model NossosGastos.Entidades.Compra
-@using NossosGastos.Extensoes
-<h1 style="text-align:center;">Cadastro de Compra</h1>
+﻿<h1 style="text-align:center;">Cadastro de Compra</h1>
 <form ng-controller="CompraController" style="width:570px; margin:0 auto;" ng-submit="salvarCompra()">
     <div style="float: left; width: 30px; height: 100%; margin-top:5px; position: fixed">
         <button type="submit" title="Salvar" class="btn btn-success" style="margin-bottom:10px;">
@@ -31,14 +29,12 @@
                 <input class="span2 data" ng-model="compra.DataCompra" onkeydown="return false;" ng-change="dataChange()" ngc-datepicker name="DataCompra" type="text" placeholder="Data da Compra">
             </div>
         </div>
-        <span>
-            {{intFormaPagamento|json}}
-        </span>
+
         <div style="padding:5px;">
             <div class="input-append input-prepend">
                 <span class="add-on">?</span>
-                <select ng-model="compra.FormaPagamento"  ng-change="gerarParcelas()" ng-options="formaPagamento.Nome for formaPagamento in formasPagamento|orderBy:'+Nome'"></select>
-                <span class="add-on" ng-show="compra.FormaPagamento==1"> <label><input type="checkbox" ng-model="compra.VirouCartao" ng-change="gerarParcelas()" /> virou o cartão</label></span>
+                <select ng-model="formaPagamentoSelecionado" ng-change="formaPagamentoChange()" ng-options="formaPagamento.Nome for formaPagamento in formasPagamento|orderBy:'+Nome'"></select>
+                <span class="add-on" ng-show="formaPagamentoSelecionado.TemVencimento"> <label><input type="checkbox" ng-model="compra.VirouCartao" ng-change="gerarParcelas()" /> virou o cartão</label></span>
             </div>
         </div>
 
@@ -71,6 +67,14 @@
             </div>
         </div>
 
+        <div style="padding:5px;">
+            <div class="input-prepend">
+                <span class="add-on" onclick="$(this).next().datepicker('show')"><i class="icon-calendar"></i> Começa a pagar em:</span>
+
+                <input class="span2 data" ng-model="melhorDia" onkeydown="return false;" ng-change="melhorDiaChange()" ngc-datepicker name="melhorDia" type="text" placeholder="Melhor dia Para Pagar">
+            </div>
+        </div>
+
 
 
         <div>
@@ -86,12 +90,12 @@
                 <tbody>
                     <tr ng-repeat="pagamento in compra.Pagamentos | orderBy:'DataVencimento'">
                         <td style="text-align:center">
-                            {{$index + 1}}
+                            {{pagamento.Parcela}}
                         </td>
                         <td>
                             <div class="input-prepend">
                                 <span class="add-on">R$</span>
-                                <input style="width:100px;" ng-model="pagamento.Valor" format="number" type="text" />
+                                <input style="width:100px;" ng-model="pagamento.Valor" ng-change="mudaTotal()" format="number" type="text" />
                             </div>
 
                         </td>

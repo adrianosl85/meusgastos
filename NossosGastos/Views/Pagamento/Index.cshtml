@@ -14,7 +14,7 @@
     </h2>
 
     <div ng-style="carregado" style="display:none;">
-        <a class="btn btn-large" style="margin-bottom:20px;" href="/Compra/NovaCompra">
+        <a class="btn btn-large" style="margin-bottom:20px;" href="/Compra/FormCompra">
             <i class="icon-shopping-cart"></i>
             <span>Adicionar nova compra</span>
         </a>
@@ -30,16 +30,8 @@
                 </ng-pluralize>
             </div>
 
-            <div class="alert alert-info">
-                Total gasto com <strong>Cartão</strong>: {{pegarTotal().cartao | currency:'R$ ' }}
-            </div>
-
-            <div class="alert alert-info">
-                Total gasto com <strong>Dinheiro</strong>: {{pegarTotal().dinheiro | currency:'R$ ' }}
-            </div>
-
-            <div class="alert alert-info">
-                Total gasto com <strong>Ticket</strong>: {{pegarTotal().ticket | currency:'R$ ' }}
+            <div class="alert alert-info" ng-repeat="formaPagamento in formasPagamento" ng-show="pegarTotal(formaPagamento.FormaPagamentoID)>0">
+                Total gasto com <strong>{{formaPagamento.Nome}}</strong>: {{pegarTotal(formaPagamento.FormaPagamentoID) | currency:'R$ ' }}
             </div>
         </div>
 
@@ -73,6 +65,14 @@
                         @*<input type="text" ng-model="filterParcelas"  style="display:block;" />*@
                     </th>
                     <th>
+                        <span style="cursor:pointer;" ng-click="sort= sort== '+Compra.FormaPagamento.Nome' ? '-Compra.FormaPagamento.Nome' : '+Compra.FormaPagamento.Nome' ">
+                            Forma de Pagamento
+                            <i ng-show="sort=='+Compra.FormaPagamento.Nome'" class="icon-chevron-up"></i>
+                            <i ng-show="sort=='-Compra.FormaPagamento.Nome'" class="icon-chevron-down"></i>
+                        </span>
+                        @*<input type="text" ng-model="filterParcelas"  style="display:block;" />*@
+                    </th>
+                    <th>
                         <span style="cursor:pointer;" ng-click="sort= sort== '+Compra.DataCompra' ? '-Compra.DataCompra' : '+Compra.DataCompra' ">
                             Data da Compra
                             <i ng-show="sort=='+Compra.DataCompra'" class="icon-chevron-up"></i>
@@ -89,8 +89,9 @@
                     <td>{{pagamento.Valor|currency:'R$ '}}</td>
                     <td>{{pagamento.Parcela < 10 ? '0'+pagamento.Parcela : pagamento.Parcela}}/{{pagamento.Compra.Parcelas < 10 ? '0'+pagamento.Compra.Parcelas: pagamento.Compra.Parcelas}}</td>
                     <td>{{pagamento.Compra.DataCompra|date:'dd/MM/yyyy'}}</td>
+                    <td>{{pagamento.Compra.FormaPagamento.Nome}}</td>
                     <td>
-                        <a class="btn" href="/compra/novacompra?compraID={{pagamento.CompraID}}"><i class="icon-edit"></i></a>
+                        <a class="btn" href="/compra/formcompra?compraid={{pagamento.CompraID}}"><i class="icon-edit"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -98,5 +99,6 @@
     </div>
 </div>
 @section scripts{
+    <script src="~/Scripts/Angular/Models/FormaPagamento/forma-pagamento-repos.js"></script>
     <script src="~/Scripts/Angular/Models/Pagamento/pagamento-controller.js"></script>
 }

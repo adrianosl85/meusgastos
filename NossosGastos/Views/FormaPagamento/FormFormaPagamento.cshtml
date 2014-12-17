@@ -1,0 +1,48 @@
+﻿<h1 style="text-align:center;">Cadastro de Formas de Pagametno</h1>
+<div ng-controller="FormaPagamentoController">
+    <form style="width:570px; margin:0 auto;" ng-submit="salvar()">
+        <div style="float: left; width: 30px; height: 100%; margin-top:5px; position: fixed">
+            <button type="submit" title="Salvar" class="btn btn-success" style="margin-bottom:10px;">
+                <i class="icon-ok"></i>
+            </button>
+
+            <button type="button" title="Voltar" ng-click="voltar()" class="btn btn-primary" style="margin-bottom:10px;">
+                <i class="icon-home"></i>
+            </button>
+
+            <a href="#myModal" title="Remover" ng-show="compra.CompraID>0" role="button" class="btn btn-danger" data-toggle="modal">
+                <i class="icon-trash"></i>
+            </a>
+        </div>
+        <div style="float: right; border-left: 1px dotted #ccc; width:500px; padding-left:10px;">
+            <div style="padding:5px;">
+                <div class="input-prepend">
+                    <span class="add-on"><label for="Nome">Nome:</label></span>
+                    <input class="span2" ng-model="formaPagamento.Nome" name="Nome" id="Nome" type="text" placeholder="Nome do Produto">
+                </div>
+            </div>
+
+            <div style="padding:5px;">
+                <div class="input-prepend">
+                    <span class="add-on"><label for="TemVencimento">Tem Vencimento: </label></span>
+
+                    <input class="span1" ng-model="formaPagamento.TemVencimento" name="TemVencimento" id="TemVencimento" type="checkbox">
+                </div>
+            </div>
+
+            <div style="padding:5px;" ng-show="formaPagamento.TemVencimento">
+                <div class="input-prepend">
+                    <span class="add-on"><label for="DiaVencimento">Dia de Vencimento: </label></span>
+
+                    <input class="span1" ng-model="formaPagamento.DiaVencimento" name="DiaVencimento" id="DiaVencimento" type="number">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Angular/Models/FormaPagamento/forma-pagamento-repos.js"></script>
+    <script src="~/Scripts/Angular/Models/FormaPagamento/forma-pagamento-controller.js"></script>
+}

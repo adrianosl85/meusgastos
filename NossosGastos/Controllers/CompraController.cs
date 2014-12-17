@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using NossosGastos.Extensoes;
 using NossosGastos.Entidades;
 using NossosGastos.Abstratos;
+using System.Data.Entity;
 
 namespace NossosGastos.Controllers
 {
@@ -31,8 +32,7 @@ namespace NossosGastos.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult NovaCompra()
+        public ActionResult FormCompra()
         {
             return View();
         }
@@ -51,7 +51,7 @@ namespace NossosGastos.Controllers
                 compraRepository.Salvar(compra);
                 transaction.Complete();
             }
-            return Json(new { success = true, urlRedirect = "/Compra/NovaCompra" });
+            return Json(new { success = true, urlRedirect = "/Compra/FormCompra" });
         }
 
         [HttpPost]
@@ -59,20 +59,17 @@ namespace NossosGastos.Controllers
         {
             compraRepository.RemoverFormaPagamento(compraID);
 
-            return Json(new { success = true, urlRedirect = "/Pagamento/Pagamentos" });
-        }
-
-
-
-        public ActionResult Compras()
-        {
-            return View(); 
+            return Json(new { success = true, urlRedirect = "/Pagamento" });
         }
 
         [HttpGet]
-        public string PegaCompras(Filter filtro)
+        public string PegaCompras()
         {
-            return new Compra().ToJson();
+            return compraRepository
+                .Compras
+                .Include(x=>x.FormaPagamento)
+                .Include(x=>x.Pagamentos)
+                .ToJson();
         }
 
         public class Filter

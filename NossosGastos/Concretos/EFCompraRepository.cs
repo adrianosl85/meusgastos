@@ -19,9 +19,8 @@ namespace NossosGastos.EFContext
         public IQueryable<Compra> Compras { get { return context.Compras; } }
         public void Salvar(Compra compra){
 
-            compra.FormaPagamento = context.FormasPagamento.Find(compra.FormaPagamento.FormaPagamentoID);
-
             var dbCompra = PegarPorID(compra.CompraID);
+
             if(dbCompra==null){
                 
                 context.Compras.Add(compra);
@@ -64,7 +63,7 @@ namespace NossosGastos.EFContext
         }
         public Compra PegarPorID(int compraID)
         {
-            return context.Compras.Include("Pagamentos").FirstOrDefault(x=>x.CompraID == compraID);
+            return context.Compras.Include("Pagamentos").Include("FormaPagamento").FirstOrDefault(x=>x.CompraID == compraID);
         }
     }
 }
