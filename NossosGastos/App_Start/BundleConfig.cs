@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace NossosGastos
+namespace Dominio
 {
     public class BundleConfig
     {

@@ -1,11 +1,11 @@
-﻿using NossosGastos.Abstratos;
+﻿using Dominio.Abstratos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NossosGastos.Extensoes;
-using NossosGastos.Entidades;
+using Extensoes;
+using Dominio.Entidades;
 
 namespace NossosGastos.Controllers
 {
@@ -56,9 +56,6 @@ namespace NossosGastos.Controllers
                     sucesso = false
                 }.ToJson();
             }
-            
-
-            return "".ToJson();
         }
 
         [HttpGet]

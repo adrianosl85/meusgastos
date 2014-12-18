@@ -1,12 +1,8 @@
-﻿using NossosGastos.Abstratos;
-using NossosGastos.EFContext;
+﻿using Dominio.Abstratos;
+using Dominio.EFContext;
 using SimpleInjector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace NossosGastos
+namespace Dominio
 {
     public static class Registrator
     {
@@ -17,6 +13,8 @@ namespace NossosGastos
 
         public static void Repositories(Container container)
         {
+
+            //Repositórios
             container.Register<ICompraRepository,EFCompraRepository>();
             container.Register<IPagamentoRepository, EFPagamentoRepository>();
             container.Register<IFormaPagamentoRepository, EFFormaPagamentoRepository>();

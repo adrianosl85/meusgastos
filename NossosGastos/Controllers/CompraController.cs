@@ -1,14 +1,12 @@
-﻿using NossosGastos.EFContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Transactions;
+﻿using System.Transactions;
 using System.Web.Mvc;
-using NossosGastos.Extensoes;
-using NossosGastos.Entidades;
-using NossosGastos.Abstratos;
+using Extensoes;
+using Dominio.Entidades;
+using Dominio.Abstratos;
 using System.Data.Entity;
+using NossosGastos.Filtro;
+using System.Linq;
+using NossosGastos.Filtro.Implementacoes;
 
 namespace NossosGastos.Controllers
 {
@@ -29,6 +27,15 @@ namespace NossosGastos.Controllers
 
         public ActionResult Index()
         {
+            Filtros filtros = new Filtros();
+            filtros.FilterNome = "América";
+
+            var filtrosCompra = new FiltroCompra(filtros);
+
+            var compras = compraRepository.Compras.ToList();
+
+            var compras2 = compras.Where(filtrosCompra.Compilar());
+
             return View();
         }
 
@@ -72,16 +79,6 @@ namespace NossosGastos.Controllers
                 .ToJson();
         }
 
-        public class Filter
-        {
-            public DateTime? FilterDataCompra { get; set; }
-            public DateTime? FilterDataVencimento { get; set; }
-            public string FilterMes { get; set; }
-            public string FilterAno { get; set; }
-            public string  FilterDia { get; set; }
-            public string FilterName { get; set; }
-            public int? FilterParcela { get; set; }
-            public int? FilterParcelas { get; set; }
-        }
+        
     }
 }
