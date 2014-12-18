@@ -7,9 +7,9 @@
     <h2 style="text-align:center; padding:5px;">
         Pagamentos de
         <a class="btn" style="margin-top:-10px;" ng-click="changeDataFiltro(-1)"><i class="icon-chevron-left"></i></a>
-        <select ng-model="mes" style="width:110px;" ng-change="filtrar()" ng-options="mes.id as mes.nome for mes in meses"></select>
+        <select ng-model="filtro.FilterMes" style="width:110px;" ng-change="filtrar()" ng-options="mes.id as mes.nome for mes in meses"></select>
         /
-        <input type="number" class="input-mini" ng-change="filtrar()" ng-model="ano" maxlength="4" />
+        <input type="number" class="input-mini" ng-change="filtrar()" ng-model="filtro.FilterAno" maxlength="4" />
         <a class="btn" style="margin-top:-10px;" ng-click="changeDataFiltro(1)"><i class="icon-chevron-right"></i></a>
     </h2>
 
@@ -99,6 +99,7 @@
     </div>
 </div>
 @section scripts{
-    <script src="~/Scripts/Angular/Models/FormaPagamento/forma-pagamento-repos.js"></script>
-    <script src="~/Scripts/Angular/Models/Pagamento/pagamento-controller.js"></script>
+    <script src="~/Scripts/Angular/Models/FormaPagamento/formaPagamentoServ.js"></script>>
+    <script src="~/Scripts/Angular/Models/Pagamento/pagamentoServ.js"></script>
+    <script src="~/Scripts/Angular/Models/Pagamento/pagamentoCtrl.js"></script>
 }

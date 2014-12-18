@@ -1,7 +1,6 @@
 ﻿/// <reference path="../../../utilitarios.js" />
-/// <reference path="../../Apps/compras.js" />
 (function () {
-    var PagamentoController = function ($scope, $filter, $http, fpRepos) {
+    var PagamentoController = function ($scope, $filter, pagamentoServ, formaPagamentoServ) {
         $scope.meses = [
             { nome: "Janeiro", id: 0 },
             { nome: "Fevereiro", id:1 },
@@ -16,18 +15,20 @@
             { nome: "Novembro", id: 10 },
             { nome: "Dezembro", id: 11 },
         ]
-        //var dataAtual = new Date(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
+
+        $scope.filtro = {};
 
         $scope.carregado = { display: 'none' };
 
         var pegaMesAno = function () {
-            $scope.mes = $scope.dataAtual.getMonth();
-            $scope.ano = $scope.dataAtual.getFullYear();
+            $scope.filtro.FilterMes = $scope.dataAtual.getMonth();
+            $scope.filtro.FilterAno = $scope.dataAtual.getFullYear();
         }
 
-        fpRepos.pegaFormasPagamento().then(function (data) {
-            $scope.formasPagamento = data;
-        });
+        formaPagamentoServ.pegaFormasPagamento()
+            .then(function (data) {
+                     $scope.formasPagamento = data;
+             });
 
         $scope.dataAtual = new Date();
         $scope.dataAtual.setMonth($scope.dataAtual.getMonth() + 1);
@@ -44,9 +45,22 @@
             $scope.filtrar();
         };
 
-        var onPegaPagamentosComplete = function (response) {
-            $scope.pagamentos = response.data;
-            $scope.carregado = {display: 'block'};
+        
+        
+        $("#DataCompra").datepicker("setDate", new Date(2014,11,12));
+
+        $scope.pegaClasse = function (pagamento) {
+            if (pagamento.Compra.Parcelas > 1) {
+                if (pagamento.Parcela == pagamento.Compra.Parcelas) {
+                    return "success";
+                } else if (pagamento.Parcela == (pagamento.Compra.Parcelas - 1)) return "warning";
+            }
+        };
+
+        //Pegar Pagamentos 
+        var onPegaPagamentosComplete = function (data) {
+            $scope.pagamentos = data;
+            $scope.carregado = { display: 'block' };
             $scope.pegaParcelasVencendo = function () {
                 var ultimasParcelas = $.grep($scope.pagamentos, function (valor) {
                     return valor.Parcela == valor.Compra.Parcelas && valor.Compra.Parcelas > 1;
@@ -59,31 +73,17 @@
                 });
 
                 return {
-                    quantidade : ultimasParcelas.length,
+                    quantidade: ultimasParcelas.length,
                     soma: soma
                 };
-            }
-        };
-        
-        $("#DataCompra").datepicker("setDate", new Date(2014,11,12));
-
-        var onErrorPagamentos = function (erro) {
-            
-        }
-
-        $scope.pegaClasse = function (pagamento) {
-            if (pagamento.Compra.Parcelas > 1) {
-                if (pagamento.Parcela == pagamento.Compra.Parcelas) {
-                    return "success";
-                } else if (pagamento.Parcela == (pagamento.Compra.Parcelas - 1)) return "warning";
             }
         };
 
         $scope.filtrar = function () {
             $scope.carregado = { display: 'none' };
-
-            $http.get("/Pagamento/PegarPagamentos?mes=" + ($scope.mes+1) + "&ano=" + $scope.ano)
-            .then(onPegaPagamentosComplete, onErrorPagamentos);
+            console.log($scope.filtro)
+            pagamentoServ.pegaPagamentos($scope.filtro)
+                .then(onPegaPagamentosComplete);
         };
 
 
@@ -103,5 +103,5 @@
         
     };
 
-    App.controller("PagamentoController", ["$scope", "$filter", "$http", "formaPagamentoRepos", PagamentoController]);
+    App.controller("PagamentoController", ["$scope", "$filter", "pagamentoServ", "formaPagamentoServ", PagamentoController]);
 })();

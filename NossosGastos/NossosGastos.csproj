@@ -149,6 +149,7 @@
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Filtro\Filtros.cs" />
     <Compile Include="Filtro\IFiltro.cs" />
+    <Compile Include="Filtro\Implementacoes\FiltroPagamento.cs" />
     <Compile Include="Filtro\Implementacoes\FiltroCompra.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,10 +187,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\Angular\CustomDirectives\CurrencyInput.js" />
     <Content Include="Scripts\Angular\CustomDirectives\defaultForm.js" />
-    <Content Include="Scripts\Angular\Models\Compra\compras-controller.js" />
-    <Content Include="Scripts\Angular\Models\FormaPagamento\forma-pagamento-controller.js" />
-    <Content Include="Scripts\Angular\Models\FormaPagamento\forma-pagamento-repos.js" />
-    <Content Include="Scripts\Angular\Models\FormaPagamento\formas-pagamento-controller.js" />
+    <Content Include="Scripts\Angular\Models\Compra\comprasCtrl.js" />
+    <Content Include="Scripts\Angular\Models\Compra\compraServ.js" />
+    <Content Include="Scripts\Angular\Models\FormaPagamento\formaPagamentoFormCtrl.js" />
+    <Content Include="Scripts\Angular\Models\FormaPagamento\formaPagamentoServ.js" />
+    <Content Include="Scripts\Angular\Models\FormaPagamento\formasPagamentoCtrl.js" />
+    <Content Include="Scripts\Angular\Models\Main\main-controller.js" />
+    <Content Include="Scripts\Angular\Models\Pagamento\pagamentoServ.js" />
     <Content Include="Scripts\Terceiros\bootstrap.js" />
     <Content Include="Scripts\Terceiros\bootstrap.min.js" />
     <Content Include="Scripts\Terceiros\datepicker-ptBr.js" />
@@ -266,8 +270,8 @@
     <Content Include="Scripts\Terceiros\angular.min.js" />
     <Content Include="Scripts\Angular\Apps\compras.js" />
     <Content Include="Scripts\Angular\CustomDirectives\datepicker.js" />
-    <Content Include="Scripts\Angular\Models\Compra\nova-compra-controller.js" />
-    <Content Include="Scripts\Angular\Models\Pagamento\pagamento-controller.js" />
+    <Content Include="Scripts\Angular\Models\Compra\compraFormCtrl.js" />
+    <Content Include="Scripts\Angular\Models\Pagamento\pagamentoCtrl.js" />
     <Content Include="Scripts\Terceiros\errors.json" />
     <Content Include="Scripts\Terceiros\angular-touch.min.js.map" />
     <Content Include="Scripts\Terceiros\angular-sanitize.min.js.map" />
@@ -1037,7 +1041,7 @@
     <Content Include="Scripts\Terceiros\knockout-2.2.0.js" />
     <Content Include="Scripts\Terceiros\modernizr-2.6.2.js" />
     <Content Include="Scripts\utilitarios.js" />
-    <Content Include="Scripts\Terceiros\_references.js" />
+    <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -3,31 +3,40 @@
 
 (function () {
 
-    var CompraController = function ($scope, $filter, $location, $http) {
+    var CompraController = function ($scope, $filter, $location, compraServ, formaPagamentoServ) {
 
-        var onPegaFormaPagametnoComplete = function (response) {
-            $scope.formasPagamento = response.data;
+
+
+        //formas pagamento
+        var onPegaFormaPagametnoComplete = function (data) {
+            $scope.formasPagamento = data;
 
             if (typeof (urlParams.compraid) == 'undefined') {
                 $scope.formaPagamentoSelecionado = $scope.formasPagamento[0];
             }
         };
 
-        $http.get("/FormaPagamento/PegaFormasPagamento")
+        //pega formas pagamento
+        formaPagamentoServ
+            .pegaFormasPagamento()
             .then(onPegaFormaPagametnoComplete);
 
 
-        var onSucess = function (response) {
-            $scope.compra = response.data;
-            $scope.compra.DataCompra = new Date($scope.compra.DataCompra);
-            $scope.valorParcela = $scope.compra.Total / $scope.compra.Parcelas;
-            $scope.melhorDia = new Date($filter('filter')($scope.compra.Pagamentos, { Parcela: 1 },true)[0].DataVencimento);
-            $scope.formaPagamentoSelecionado = $filter('filter')($scope.formasPagamento, { FormaPagamentoID: $scope.compra.FormaPagamentoID })[0];
+
+        //Pegar compra
+        var onPegaCompra = function (data) {
+            $scope.compra = data;
+            $scope.compra.DataCompra = new Date(data.DataCompra);
+            $scope.valorParcela = data.Total / data.Parcelas;
+            $scope.melhorDia = new Date($filter('filter')(data.Pagamentos, { Parcela: 1 }, true)[0].DataVencimento);
+            $scope.formaPagamentoSelecionado = $filter('filter')($scope.formasPagamento, { FormaPagamentoID: data.FormaPagamentoID })[0];
         };
 
         if (angular.isDefined(urlParams.compraid))
-            $http.post("/Compra/PegaCompraById", { compraID: urlParams.compraid })
-                .then(onSucess);
+            compraServ.pegaCompra().then(onPegaCompra);
+
+
+
 
         $scope.mudaValorTotal = function () {
             var parcelas = angular.isDefined($scope.compra.Parcelas) ? $scope.compra.Parcelas : 1;
@@ -118,32 +127,31 @@
             window.location.href = "/Pagamento";
         };
 
-        var onSalvarCompraComplete = function (response) {
+        //Salvar compra
+        var onSalvarComplete = function (response) {
             window.location.href = response.data.urlRedirect;
         };
 
-        $scope.salvarCompra = function () {
-            $scope.compra.FormaPagamentoID = $scope.formaPagamentoSelecionado.FormaPagamentoID;
-
-            $http.post("/Compra/SalvarCompra", $scope.compra)
-                .then(onSalvarCompraComplete);
-        };
-
+        $scope.salvar = function () {
+            compraServ.salvar($scope.compra)
+                .then(onSalvarComplete);
+        }
+        
+        //Remover
         var onRemoverCompra = function (response) {
             window.location.href = response.data.urlRedirect;
         };
 
-        $scope.removerCompra = function (compraID) {
-            $http.post("/Compra/DeletarCompra", { compraID: compraID })
+        $scope.remover = function (compraID) {
+            compraServ.remover(compraID)
                 .then(onRemoverCompra);
 
             return false;
         };
-
-
+        
     };
 
 
-    App.controller("CompraController", ["$scope", "$filter", "$location", "$http", CompraController]);
+    App.controller("CompraController", ["$scope", "$filter", "$location", "compraServ","formaPagamentoServ", CompraController]);
 
 })();

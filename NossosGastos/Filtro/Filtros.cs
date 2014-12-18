@@ -9,12 +9,17 @@ namespace NossosGastos.Filtro
     {
         public DateTime? FilterDataCompra { get; set; }
         public DateTime? FilterDataVencimento { get; set; }
-        public string FilterMes { get; set; }
-        public string FilterAno { get; set; }
-        public string FilterDia { get; set; }
+        public int? FilterMes { get; set; }
+        public int? FilterAno { get; set; }
+        public int? FilterDia { get; set; }
         public string FilterNome { get; set; }
         public int? FilterParcela { get; set; }
         public int? FilterParcelas { get; set; }
         public IEnumerable<int> FormasPagamento { get; set; }
+
+        public Filtros()
+        {
+            FormasPagamento = new HashSet<int>();
+        }
     }
 }

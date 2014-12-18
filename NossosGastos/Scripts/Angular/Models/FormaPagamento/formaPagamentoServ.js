@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../_references.js" />
 (function () {
-    var formaPagamentoRepos = function ($http) {
+    var formaPagamentoServ = function ($http) {
 
         var pegaFormaPagamento = function (formaPagamentoID) {
             return $http.get("/FormaPagamento/PegaFormaPagamento?formaPagamentoID=" + formaPagamentoID)
@@ -38,6 +38,6 @@
         };
     };
 
-    App.factory('formaPagamentoRepos', ["$http", formaPagamentoRepos]);
+    App.factory('formaPagamentoServ', ["$http", formaPagamentoServ]);
 
 }());

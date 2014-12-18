@@ -27,15 +27,6 @@ namespace NossosGastos.Controllers
 
         public ActionResult Index()
         {
-            Filtros filtros = new Filtros();
-            filtros.FilterNome = "América";
-
-            var filtrosCompra = new FiltroCompra(filtros);
-
-            var compras = compraRepository.Compras.ToList();
-
-            var compras2 = compras.Where(filtrosCompra.Compilar());
-
             return View();
         }
 
@@ -45,13 +36,7 @@ namespace NossosGastos.Controllers
         }
 
         [HttpPost]
-        public string PegaCompraById(int compraID)
-        {
-            return compraRepository.PegarPorID(compraID).ToJson();
-        }
-
-        [HttpPost]
-        public ActionResult SalvarCompra(Compra compra)
+        public ActionResult Salvar(Compra compra)
         {
             using (var transaction = new TransactionScope())
             {
@@ -70,12 +55,22 @@ namespace NossosGastos.Controllers
         }
 
         [HttpGet]
-        public string PegaCompras()
+        public string PegaCompra(int compraID)
         {
+            return compraRepository.PegarPorID(compraID).ToJson();
+        }
+
+        [HttpGet]
+        public string PegaCompras(Filtros filtro)
+        {
+            var filtroCompra = new FiltroCompra(filtro).Compilar();
+
             return compraRepository
                 .Compras
                 .Include(x=>x.FormaPagamento)
                 .Include(x=>x.Pagamentos)
+                .Where(filtroCompra)
+                .ToList()
                 .ToJson();
         }
 

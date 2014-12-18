@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Extensoes;
 using System.Data.Entity;
+using NossosGastos.Filtro;
+using NossosGastos.Filtro.Implementacoes;
 
 namespace NossosGastos.Controllers
 {
@@ -27,14 +29,19 @@ namespace NossosGastos.Controllers
             return View();
         }
 
-        [HttpGet]
-        public string PegarPagamentos(int mes, int ano)
+
+        [HttpPost]
+        public string PegaPagamentos(Filtros filtro)
         {
+
+            var filtroPagamento = new FiltroPagamento(filtro).Compilar();
+
             return pagamentoRepository
                 .Pagamentos
                 .Include(x=>x.Compra)
                 .Include(x=>x.Compra.FormaPagamento)
-                .ToList().Where(x => x.DataVencimento.Month == mes && x.DataVencimento.Year == ano).ToJson();
+                .Where(filtroPagamento)
+                .ToList().ToJson();
         }
 
     }

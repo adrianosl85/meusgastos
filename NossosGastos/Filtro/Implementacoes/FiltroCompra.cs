@@ -8,29 +8,36 @@ using System.Web;
 
 namespace NossosGastos.Filtro.Implementacoes
 {
-    public class FiltroCompra : IFiltro
+    public class FiltroCompra : FiltroAbstrato<Compra>
     {
-        private readonly IExpressao<Compra> expressao;
+        
         private readonly Filtros filtro;
         public FiltroCompra(Filtros filtro)
         {
             this.filtro = filtro;
-            expressao = new Expressao<Compra>();
 
             Construir();
         }
-        public void Construir()
+
+        protected override void Construir()
         {
-            expressao.Criar(x => true);
+            base.Construir();
 
             if (!string.IsNullOrEmpty(filtro.FilterNome))
                 expressao.E(x => x.Nome.StartsWith(filtro.FilterNome));
-        }
 
+            if (filtro.FormasPagamento.Count() > 0)
+            {
+                foreach (int formaPagamentoID in filtro.FormasPagamento)
+                {
+                    expressao.E(x => x.FormaPagamentoID == formaPagamentoID);
+                }
+            }
 
-        public Func<Compra, bool> Compilar()
-        {
-            return expressao.Compilar();
+            if (filtro.FilterDataCompra.HasValue)
+            {
+                expressao.E(x => x.DataCompra == filtro.FilterDataCompra);
+            }
         }
     }
 }

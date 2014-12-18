@@ -54,7 +54,8 @@
                 <td>{{compra.Total|currency:moeda}} ({{compra.Total/compra.Parcelas|currency:'x'}})</td>
                 <td><span ng-bind="compra.Parcelas"></span>/<span ng-bind="pegaParcelaAtual(compra)"></span></td>
                 <td ng-bind="compra.DataCompra|date:'dd/MM/yyyy'"></td>
-                <td ng-bind="compra.FormaPagamento.Nome"><td>
+                <td ng-bind="compra.FormaPagamento.Nome">
+                <td>
                 <td><a href="/compra/formcompra?compraid={{compra.CompraID}}" class="btn"><i class="icon-edit"></i></a></td>
             </tr>
         </tbody>
@@ -62,5 +63,6 @@
 </div>
 
 @section scripts{
-    <script src="~/Scripts/Angular/Models/Compra/compras-controller.js"></script>
+    <script src="~/Scripts/Angular/Models/Compra/compraServ.js"></script>
+    <script src="~/Scripts/Angular/Models/Compra/comprasCtrl.js"></script>
 }
