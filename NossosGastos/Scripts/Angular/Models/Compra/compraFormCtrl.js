@@ -5,14 +5,16 @@
 
     var CompraController = function ($scope, $filter, $location, compraServ, formaPagamentoServ) {
 
-
+        $scope.compra = {
+            FormaPagamentoID: 1
+        }
 
         //formas pagamento
         var onPegaFormaPagametnoComplete = function (data) {
             $scope.formasPagamento = data;
 
             if (typeof (urlParams.compraid) == 'undefined') {
-                $scope.formaPagamentoSelecionado = $scope.formasPagamento[0];
+                    $scope.formaPagamentoSelecionado = $scope.formasPagamento[0];
             }
         };
 
@@ -32,8 +34,10 @@
             $scope.formaPagamentoSelecionado = $filter('filter')($scope.formasPagamento, { FormaPagamentoID: data.FormaPagamentoID })[0];
         };
 
-        if (angular.isDefined(urlParams.compraid))
-            compraServ.pegaCompra().then(onPegaCompra);
+        if (angular.isDefined(urlParams.compraid)) {
+            compraServ.pegaCompra(urlParams.compraid).then(onPegaCompra);
+        }
+            
 
 
 
@@ -67,13 +71,7 @@
         };
 
         $scope.dataChange = function () {
-            if ($scope.formaPagamentoSelecionado.TemVencimento)
-                if ($scope.compra.DataCompra.getDate() > $scope.formaPagamentoSelecionado.DiaVencimento) {
-                    $scope.compra.VirouCartao = true;
-                } else {
-                    $scope.compra.VirouCartao = false;
-                }
-            $scope.melhorDia = $scope.compra.DataCompra;
+            $scope.melhorDia = pegaDataArrumada();
 
             $scope.gerarParcelas();  
         };
@@ -84,6 +82,8 @@
         };
 
         $scope.formaPagamentoChange = function () {
+            $scope.compra.FormaPagamentoID = $scope.formaPagamentoSelecionado.FormaPagamentoID;
+
             $scope.gerarParcelas();
         };
 
@@ -94,28 +94,45 @@
             });
         };
 
+        var pegaDataArrumada = function () {
+            var dataVencimentoBase = angular.isDefined($scope.melhorDia) ? new Date($scope.melhorDia) : $scope.compra.DataCompra;
+
+            if ($scope.formaPagamentoSelecionado.TemVencimento)
+                if (dataVencimentoBase.getDate() > $scope.formaPagamentoSelecionado.DiaVencimento) {
+                    $scope.compra.VirouCartao = true;
+                } else {
+                    $scope.compra.VirouCartao = false;
+                }
+
+            
+
+            if (angular.isDate(dataVencimentoBase) && $scope.formaPagamentoSelecionado.TemVencimento) {
+                console.log("entrou")
+                dataVencimentoBase.setMonth($scope.compra.VirouCartao ? (dataVencimentoBase.getMonth() + 1) : dataVencimentoBase.getMonth());
+                dataVencimentoBase.setDate($scope.formaPagamentoSelecionado.DiaVencimento);
+            }
+
+            return dataVencimentoBase;
+        };
+
         $scope.gerarParcelas = function () {
 
             var parcelas = $scope.compra.Parcelas;
 
             $scope.compra.Pagamentos = [];
 
-            var dataVencimentoBase = angular.isDefined($scope.melhorDia) ? new Date($scope.melhorDia) : '';
+            dataVencimentoBase = pegaDataArrumada();
 
-            if (angular.isDate(dataVencimentoBase) && $scope.formaPagamentoSelecionado.TemVencimento) {
-                dataVencimentoBase.setMonth($scope.compra.VirouCartao ? (dataVencimentoBase.getMonth() + 1) : dataVencimentoBase.getMonth());
-
-                dataVencimentoBase.setDate($scope.formaPagamentoSelecionado.DiaVencimento);
-            }
 
             for (var i = 0; i < parcelas; i++) {
 
-                var aux = angular.copy(dataVencimentoBase);
+                var dataParcela = new Date(dataVencimentoBase.setMonth( dataVencimentoBase.getMonth() + 1));
+                console.log(dataParcela)
 
                 $scope.compra.Pagamentos.push({
                     Parcela: i + 1,
                     Valor: parseFloat($scope.compra.Total) / parcelas,
-                    DataVencimento: angular.isDate(dataVencimentoBase) ? new Date(aux.setMonth(dataVencimentoBase.getMonth() + i)) : ''
+                    DataVencimento: angular.isDate(dataVencimentoBase) ? dataParcela : ''
                 });
             }
 
@@ -129,6 +146,7 @@
 
         //Salvar compra
         var onSalvarComplete = function (response) {
+            
             window.location.href = response.data.urlRedirect;
         };
 

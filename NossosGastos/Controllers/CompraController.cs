@@ -47,7 +47,7 @@ namespace NossosGastos.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeletarCompra(int compraID)
+        public ActionResult Remover(int compraID)
         {
             compraRepository.RemoverFormaPagamento(compraID);
 
@@ -64,6 +64,8 @@ namespace NossosGastos.Controllers
         public string PegaCompras(Filtros filtro)
         {
             var filtroCompra = new FiltroCompra(filtro).Compilar();
+
+
 
             return compraRepository
                 .Compras

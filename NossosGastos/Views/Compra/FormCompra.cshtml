@@ -1,5 +1,5 @@
 ﻿<h1 style="text-align:center;">Cadastro de Compra</h1>
-<form ng-controller="CompraController" style="width:570px; margin:0 auto;" ng-submit="salvarCompra()">
+<form ng-controller="CompraController" style="width:570px; margin:0 auto;" ng-submit="salvar()">
     <div style="float: left; width: 30px; height: 100%; margin-top:5px; position: fixed">
         <button type="submit" title="Salvar" class="btn btn-success" style="margin-bottom:10px;">
             <i class="icon-ok"></i>
@@ -124,7 +124,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
-                <a class="btn btn-primary" ng-click="removerCompra(compra.CompraID)">Sim</a>
+                <a class="btn btn-primary" ng-click="remover(compra.CompraID)">Sim</a>
             </div>
         </div>
     </div>

@@ -81,7 +81,6 @@
 
         $scope.filtrar = function () {
             $scope.carregado = { display: 'none' };
-            console.log($scope.filtro)
             pagamentoServ.pegaPagamentos($scope.filtro)
                 .then(onPegaPagamentosComplete);
         };

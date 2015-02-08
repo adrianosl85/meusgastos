@@ -4,7 +4,7 @@
     var CompraServ = function ($http) {
 
         var pegaCompra = function (compraID) {
-            return $http.get("/Compra/PegaCompra", compraID )
+            return $http.get("/Compra/PegaCompra?compraID="+compraID)
                 .then(function (response) { return response.data });
         };
 
@@ -19,7 +19,7 @@
 
 
         var remover = function (compraID) {
-            return $http.post("/Compra/Remover", compraID);
+            return $http.post("/Compra/Remover", { compraID: compraID });
         }
 
 
