@@ -9,3 +9,4 @@ C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Domain\bin\D
 C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Domain\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Domain\obj\Debug\Domain.dll
 C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Domain\obj\Debug\Domain.pdb
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Domain\obj\Debug\Dominio.csprojResolveAssemblyReference.cache

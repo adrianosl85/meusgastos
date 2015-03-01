@@ -71,7 +71,14 @@
         };
 
         $scope.dataChange = function () {
-            $scope.melhorDia = pegaDataArrumada();
+            if ($scope.formaPagamentoSelecionado.TemVencimento)
+                if ($scope.compra.DataCompra.getDate() > $scope.formaPagamentoSelecionado.DiaVencimento) {
+                    $scope.compra.VirouCartao = true;
+                } else {
+                    $scope.compra.VirouCartao = false;
+                }
+
+            $scope.melhorDia = pegaMelhorDia();
 
             $scope.gerarParcelas();  
         };
@@ -94,25 +101,14 @@
             });
         };
 
-        var pegaDataArrumada = function () {
-            var dataVencimentoBase = angular.isDefined($scope.melhorDia) ? new Date($scope.melhorDia) : $scope.compra.DataCompra;
+        var pegaMelhorDia = function () {
+            var melhorDia = angular.isDefined($scope.melhorDia) ? new Date($scope.melhorDia) : $scope.compra.DataCompra;
 
-            if ($scope.formaPagamentoSelecionado.TemVencimento)
-                if (dataVencimentoBase.getDate() > $scope.formaPagamentoSelecionado.DiaVencimento) {
-                    $scope.compra.VirouCartao = true;
-                } else {
-                    $scope.compra.VirouCartao = false;
-                }
-
-            
-
-            if (angular.isDate(dataVencimentoBase) && $scope.formaPagamentoSelecionado.TemVencimento) {
-                console.log("entrou")
-                dataVencimentoBase.setMonth($scope.compra.VirouCartao ? (dataVencimentoBase.getMonth() + 1) : dataVencimentoBase.getMonth());
-                dataVencimentoBase.setDate($scope.formaPagamentoSelecionado.DiaVencimento);
+            if (angular.isDate(melhorDia) && $scope.formaPagamentoSelecionado.TemVencimento) {
+                melhorDia.setMonth($scope.compra.VirouCartao ? (melhorDia.getMonth() + 1) : melhorDia.getMonth());
+                melhorDia.setDate($scope.formaPagamentoSelecionado.DiaVencimento);
             }
-
-            return dataVencimentoBase;
+            return melhorDia;
         };
 
         $scope.gerarParcelas = function () {
@@ -121,19 +117,19 @@
 
             $scope.compra.Pagamentos = [];
 
-            dataVencimentoBase = pegaDataArrumada();
+           
 
-
+            var dataParcela = new Date($scope.melhorDia);
+            
             for (var i = 0; i < parcelas; i++) {
-
-                var dataParcela = new Date(dataVencimentoBase.setMonth( dataVencimentoBase.getMonth() + 1));
-                console.log(dataParcela)
-
+                
                 $scope.compra.Pagamentos.push({
                     Parcela: i + 1,
                     Valor: parseFloat($scope.compra.Total) / parcelas,
-                    DataVencimento: angular.isDate(dataVencimentoBase) ? dataParcela : ''
+                    DataVencimento: new Date(dataParcela)
                 });
+                
+                dataParcela.setMonth(dataParcela.getMonth() + 1);
             }
 
 
