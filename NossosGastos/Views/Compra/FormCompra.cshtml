@@ -34,7 +34,7 @@
             <div class="input-append input-prepend">
                 <span class="add-on">?</span>
                 <select ng-model="formaPagamentoSelecionado" ng-change="formaPagamentoChange()" ng-options="formaPagamento.Nome for formaPagamento in formasPagamento|orderBy:'+Nome'"></select>
-                <span class="add-on" ng-show="formaPagamentoSelecionado.TemVencimento"> <label><input type="checkbox" ng-model="compra.VirouCartao" ng-change="gerarParcelas()" /> virou o cartão</label></span>
+                <span class="add-on" ng-show="formaPagamentoSelecionado.TemVencimento"> <label><input type="checkbox" ng-model="compra.VirouCartao" ng-change="virouCartaoChange()" /> virou o cartão</label></span>
             </div>
         </div>
 

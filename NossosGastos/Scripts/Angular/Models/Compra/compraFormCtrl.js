@@ -78,10 +78,16 @@
                     $scope.compra.VirouCartao = false;
                 }
 
-            $scope.melhorDia = pegaMelhorDia();
+            pegaMelhorDia();
 
             $scope.gerarParcelas();  
         };
+
+
+        $scope.virouCartaoChange = function () {
+            pegaMelhorDia();
+            $scope.gerarParcelas();
+        }
 
 
         $scope.melhorDiaChange = function () {
@@ -102,13 +108,16 @@
         };
 
         var pegaMelhorDia = function () {
-            var melhorDia = angular.isDefined($scope.melhorDia) ? new Date($scope.melhorDia) : $scope.compra.DataCompra;
+            var melhorDia = new Date($scope.compra.DataCompra);
 
             if (angular.isDate(melhorDia) && $scope.formaPagamentoSelecionado.TemVencimento) {
-                melhorDia.setMonth($scope.compra.VirouCartao ? (melhorDia.getMonth() + 1) : melhorDia.getMonth());
                 melhorDia.setDate($scope.formaPagamentoSelecionado.DiaVencimento);
+                var month = $scope.compra.VirouCartao ? (melhorDia.getMonth() + 1) : melhorDia.getMonth();
+                melhorDia.setMonth(month);
+                
             }
-            return melhorDia;
+        
+            $scope.melhorDia = melhorDia;
         };
 
         $scope.gerarParcelas = function () {

@@ -36,15 +36,6 @@ namespace NossosGastos.Controllers
 
             var filtroPagamento = new FiltroPagamento(filtro).Compilar();
 
-
-            var teste = pagamentoRepository
-                .Pagamentos
-                .Include(x => x.Compra)
-                .Include(x => x.Compra.FormaPagamento)
-                .Where(x=>x.CompraID == 86)
-                .ToList();
-                
-
             return pagamentoRepository
                 .Pagamentos
                 .Include(x=>x.Compra)

@@ -14,7 +14,9 @@
                 elem.priceFormat({
                     prefix: '',
                     centsSeparator: ',',
-                    thousandsSeparator: '.'
+                    thousandsSeparator: '.',
+                    allowNegative: true
+                    //insertPlusSign: 'true'
                 });
 
                 return parseFloat(elem[0].value.replace('.','').replace(',','.'));

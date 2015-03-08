@@ -61,6 +61,7 @@
     <Compile Include="Concretos\EFFormaPagamentoRepository.cs" />
     <Compile Include="Concretos\EFPagamentoRepository.cs" />
     <Compile Include="EFContext\EFDBContas.cs" />
+    <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Compra.cs" />
     <Compile Include="Entidades\FormaPagamento.cs" />
     <Compile Include="Entidades\Pagamento.cs" />

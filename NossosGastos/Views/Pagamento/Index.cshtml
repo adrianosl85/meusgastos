@@ -33,6 +33,10 @@
             <div class="alert alert-info" ng-repeat="formaPagamento in formasPagamento" ng-show="pegarTotal(formaPagamento.FormaPagamentoID)>0">
                 Total gasto com <strong>{{formaPagamento.Nome}}</strong>: {{pegarTotal(formaPagamento.FormaPagamentoID) | currency:'R$ ' }}
             </div>
+
+            <div class="alert alert-info">
+                Total gasto: {{pegarTotal() | currency:'R$ ' }}
+            </div>
         </div>
 
 
@@ -99,7 +103,7 @@
     </div>
 </div>
 @section scripts{
-    <script src="~/Scripts/Angular/Models/FormaPagamento/formaPagamentoServ.js"></script>>
+    <script src="~/Scripts/Angular/Models/FormaPagamento/formaPagamentoServ.js"></script>
     <script src="~/Scripts/Angular/Models/Pagamento/pagamentoServ.js"></script>
     <script src="~/Scripts/Angular/Models/Pagamento/pagamentoCtrl.js"></script>
 }

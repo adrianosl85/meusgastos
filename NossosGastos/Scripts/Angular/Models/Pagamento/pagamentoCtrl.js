@@ -3,7 +3,7 @@
     var PagamentoController = function ($scope, $filter, pagamentoServ, formaPagamentoServ) {
         $scope.meses = [
             { nome: "Janeiro", id: 0 },
-            { nome: "Fevereiro", id:1 },
+            { nome: "Fevereiro", id: 1 },
             { nome: "Março", id: 2 },
             { nome: "Abril", id: 3 },
             { nome: "Maio", id: 4 },
@@ -27,16 +27,19 @@
 
         formaPagamentoServ.pegaFormasPagamento()
             .then(function (data) {
-                     $scope.formasPagamento = data;
-             });
+                $scope.formasPagamento = data;
+            });
 
         $scope.dataAtual = new Date();
-        $scope.dataAtual.setMonth($scope.dataAtual.getMonth() + 1);
+        var dia = $scope.dataAtual.getDate();
+
+        if (dia > 9)
+            $scope.dataAtual.setMonth($scope.dataAtual.getMonth() + 1);
 
         pegaMesAno();
 
         $scope.moeda = "R$ ";
-        
+
         $scope.sort = "+Compra.Nome";
 
         $scope.changeDataFiltro = function (mes) {
@@ -45,9 +48,9 @@
             $scope.filtrar();
         };
 
-        
-        
-        $("#DataCompra").datepicker("setDate", new Date(2014,11,12));
+
+
+
 
         $scope.pegaClasse = function (pagamento) {
             if (pagamento.Compra.Parcelas > 1) {
@@ -87,7 +90,10 @@
 
 
         $scope.pegarTotal = function (formaPagamentoID) {
-            var pagamentoPorFormaPagamento = $filter('filter')($scope.pagamentos, { Compra: { FormaPagamentoID: formaPagamentoID } });
+            var pagamentoPorFormaPagamento = $scope.pagamentos;
+
+            if (typeof (formaPagamentoID) != 'undefined')
+                var pagamentoPorFormaPagamento = $filter('filter')(pagamentoPorFormaPagamento, { Compra: { FormaPagamentoID: formaPagamentoID } });
             var soma = 0;
 
             angular.forEach(pagamentoPorFormaPagamento, function (valor) {
@@ -99,7 +105,7 @@
 
 
         $scope.filtrar();
-        
+
     };
 
     App.controller("PagamentoController", ["$scope", "$filter", "pagamentoServ", "formaPagamentoServ", PagamentoController]);
