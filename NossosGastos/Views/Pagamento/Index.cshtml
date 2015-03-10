@@ -30,8 +30,12 @@
                 </ng-pluralize>
             </div>
 
-            <div class="alert alert-info" ng-repeat="formaPagamento in formasPagamento" ng-show="pegarTotal(formaPagamento.FormaPagamentoID)>0">
-                Total gasto com <strong>{{formaPagamento.Nome}}</strong>: {{pegarTotal(formaPagamento.FormaPagamentoID) | currency:'R$ ' }}
+            <div class="alert alert-info" ng-repeat="formaPagamento in formasPagamento" ng-show="pegarTotal('FormaPagamentoID',formaPagamento.FormaPagamentoID)>0">
+                Total gasto com <strong>{{formaPagamento.Nome}}</strong>: {{pegarTotal('FormaPagamentoID',formaPagamento.FormaPagamentoID) | currency:'R$ ' }}
+            </div>
+
+            <div class="alert alert-info" ng-repeat="categoria in categorias" ng-show="pegarTotal('CategoriaID',categoria.CategoriaID)>0">
+                Total gasto com <strong>{{categoria.NomeCategoria}}</strong>: {{pegarTotal('CategoriaID',categoria.CategoriaID) | currency:'R$ ' }}
             </div>
 
             <div class="alert alert-info">
@@ -92,8 +96,8 @@
                     <td>{{pagamento.Compra.Nome}}</td>
                     <td>{{pagamento.Valor|currency:'R$ '}}</td>
                     <td>{{pagamento.Parcela < 10 ? '0'+pagamento.Parcela : pagamento.Parcela}}/{{pagamento.Compra.Parcelas < 10 ? '0'+pagamento.Compra.Parcelas: pagamento.Compra.Parcelas}}</td>
-                    <td>{{pagamento.Compra.DataCompra|date:'dd/MM/yyyy'}}</td>
                     <td>{{pagamento.Compra.FormaPagamento.Nome}}</td>
+                    <td>{{pagamento.Compra.DataCompra|date:'dd/MM/yyyy'}}</td>
                     <td>
                         <a class="btn" href="/compra/formcompra?compraid={{pagamento.CompraID}}"><i class="icon-edit"></i></a>
                     </td>
@@ -104,6 +108,7 @@
 </div>
 @section scripts{
     <script src="~/Scripts/Angular/Models/FormaPagamento/formaPagamentoServ.js"></script>
+<script src="~/Scripts/Angular/Models/Categoria/categoriaServ.js"></script>
     <script src="~/Scripts/Angular/Models/Pagamento/pagamentoServ.js"></script>
     <script src="~/Scripts/Angular/Models/Pagamento/pagamentoCtrl.js"></script>
 }

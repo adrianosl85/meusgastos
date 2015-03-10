@@ -1,5 +1,5 @@
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Expressao\bin\Debug\Expressao.dll
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Expressao\bin\Debug\Expressao.pdb
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.csprojResolveAssemblyReference.cache
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.dll
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.pdb
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\bin\Debug\Expressao.dll
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\bin\Debug\Expressao.pdb
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.csprojResolveAssemblyReference.cache
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.dll
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.pdb

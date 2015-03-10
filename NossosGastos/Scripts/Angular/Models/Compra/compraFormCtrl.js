@@ -3,11 +3,16 @@
 
 (function () {
 
-    var CompraController = function ($scope, $filter, $location, compraServ, formaPagamentoServ) {
+    var CompraController = function ($scope, $filter, $location, compraServ, formaPagamentoServ, categoriaServ) {
 
         $scope.compra = {
             FormaPagamentoID: 1
         }
+
+        //Categorias
+        categoriaServ.pegaCategorias().then(function (categorias) {
+            $scope.categorias = categorias;
+        })
 
         //formas pagamento
         var onPegaFormaPagametnoComplete = function (data) {
@@ -175,6 +180,6 @@
     };
 
 
-    App.controller("CompraController", ["$scope", "$filter", "$location", "compraServ","formaPagamentoServ", CompraController]);
+    App.controller("CompraController", ["$scope", "$filter", "$location", "compraServ","formaPagamentoServ", "categoriaServ", CompraController]);
 
 })();

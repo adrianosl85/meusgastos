@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidades
 {
-    [Table("Categoria")]
+    [Table("Categorias")]
     public class Categoria
     {
         [Key]
         public int CategoriaID { get; set; }
         public string NomeCategoria { get; set; }
-        public int CategoriaPaiID { get; set; }
+        public int? CategoriaPaiID { get; set; }
         [ForeignKey("CategoriaPaiID")]
         public Categoria CategoriaPai { get; set; }
     }

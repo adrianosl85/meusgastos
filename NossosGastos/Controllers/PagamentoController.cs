@@ -40,6 +40,7 @@ namespace NossosGastos.Controllers
                 .Pagamentos
                 .Include(x=>x.Compra)
                 .Include(x=>x.Compra.FormaPagamento)
+                .Include(x=>x.Compra.Categoria)
                 .Where(filtroPagamento)
                 .ToList().ToJson();
         }

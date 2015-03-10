@@ -24,9 +24,10 @@
 
         <div style="padding:5px;">
             <div class="input-prepend">
-                <span class="add-on"><i onclick="$(this).parent().next().datepicker('show')" class="icon-calendar"></i></span>
-
-                <input class="span2 data" ng-model="compra.DataCompra" onkeydown="return false;" ng-change="dataChange()" ngc-datepicker name="DataCompra" type="text" placeholder="Data da Compra">
+                <span class="add-on"><i class="icon-tags"></i></span>
+                <select ng-model="compra.CategoriaID" ng-options="categoria.CategoriaID as categoria.NomeCategoria for categoria in categorias|orderBy:'NomeCategoria'">
+                    <option value="">Selecione uma Categoria</option>
+                </select>
             </div>
         </div>
 
@@ -35,6 +36,14 @@
                 <span class="add-on">?</span>
                 <select ng-model="formaPagamentoSelecionado" ng-change="formaPagamentoChange()" ng-options="formaPagamento.Nome for formaPagamento in formasPagamento|orderBy:'+Nome'"></select>
                 <span class="add-on" ng-show="formaPagamentoSelecionado.TemVencimento"> <label><input type="checkbox" ng-model="compra.VirouCartao" ng-change="virouCartaoChange()" /> virou o cartão</label></span>
+            </div>
+        </div>
+
+        <div style="padding:5px;">
+            <div class="input-prepend">
+                <span class="add-on"><i onclick="$(this).parent().next().datepicker('show')" class="icon-calendar"></i></span>
+
+                <input class="span2 data" ng-model="compra.DataCompra" onkeydown="return false;" ng-change="dataChange()" ngc-datepicker name="DataCompra" type="text" placeholder="Data da Compra">
             </div>
         </div>
 
@@ -132,6 +141,7 @@
 <div style="clear:both;"></div>
 @section scripts{
     <script src="~/Scripts/Angular/Models/FormaPagamento/formaPagamentoServ.js"></script>
+    <script src="~/Scripts/Angular/Models/Categoria/categoriaServ.js"></script>
     <script src="~/Scripts/Angular/Models/Compra/compraServ.js"></script>
     <script src="~/Scripts/Angular/Models/Compra/compraFormCtrl.js"></script>
 }

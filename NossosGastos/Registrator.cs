@@ -1,4 +1,5 @@
 ﻿using Dominio.Abstratos;
+using Dominio.Concretos;
 using Dominio.EFContext;
 using SimpleInjector;
 
@@ -18,6 +19,7 @@ namespace Dominio
             container.Register<ICompraRepository,EFCompraRepository>();
             container.Register<IPagamentoRepository, EFPagamentoRepository>();
             container.Register<IFormaPagamentoRepository, EFFormaPagamentoRepository>();
+            container.Register<ICategoriaRepository, EFCategoriaRepository>();
         }
 
     }

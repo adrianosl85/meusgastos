@@ -1,0 +1,39 @@
+﻿@model Dominio.Entidades.Categoria
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 style="text-align:center;">Categorias</h1>
+<div ng-controller="CategoriaController">
+    <a class="btn btn-large" style="margin-bottom:20px;" href="/Categoria/FormCategoria">
+        <i class="icon-tags"></i>
+        <span>Adicionar nova Categoria</span>
+    </a>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <span style="cursor:pointer;" ng-click="sort= sort== '+NomeCategoria' ? '-NomeCategoria' : '+NomeCategoria' ">
+                        Nome da Categoria
+                        <i ng-show="sort=='+NomeCategoria'" class="icon-chevron-up"></i>
+                        <i ng-show="sort=='-NomeCategoria'" class="icon-chevron-down"></i>
+                    </span>
+                </th>
+
+                <th style="width:80px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="categoria in categorias|orderBy:sort">
+                <td ng-bind="categoria.NomeCategoria"></td>
+                <td><a href="/compra/formcompra?compraid={{categoria.categoriaID}}" class="btn"><i class="icon-edit"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+<script src="~/Scripts/Angular/Models/Categoria/categoriaServ.js"></script>
+<script src="~/Scripts/Angular/Models/Categoria/categoriaCtrl.js"></script>
+}

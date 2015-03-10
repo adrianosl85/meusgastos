@@ -1,7 +1,6 @@
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Extensoes.dll
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Extensoes.pdb
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Newtonsoft.Json.dll
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Newtonsoft.Json.xml
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.csprojResolveAssemblyReference.cache
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.dll
-C:\Users\adriano\documents\visual studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.pdb
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Extensoes.dll
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Extensoes.pdb
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Newtonsoft.Json.dll
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Newtonsoft.Json.xml
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.dll
+C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.pdb

@@ -13,6 +13,7 @@ namespace Dominio.EFContext
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<FormaPagamento> FormasPagamento { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CompraMap());

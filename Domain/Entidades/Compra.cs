@@ -21,6 +21,8 @@ namespace Dominio.Entidades
         public FormaPagamento FormaPagamento { get; set; }
         public ICollection<Pagamento> Pagamentos { get; set; }
         public bool VirouCartao { get; set; }
+        public int? CategoriaID { get; set; }
+        public Categoria Categoria { get; set; }
         public Compra()
         {
             Pagamentos = new HashSet<Pagamento>();

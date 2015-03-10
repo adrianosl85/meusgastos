@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../utilitarios.js" />
 (function () {
-    var PagamentoController = function ($scope, $filter, pagamentoServ, formaPagamentoServ) {
+    var PagamentoController = function ($scope, $filter, pagamentoServ, formaPagamentoServ, categoriaServ) {
         $scope.meses = [
             { nome: "Janeiro", id: 0 },
             { nome: "Fevereiro", id: 1 },
@@ -19,6 +19,10 @@
         $scope.filtro = {};
 
         $scope.carregado = { display: 'none' };
+
+        categoriaServ.pegaCategorias().then(function (categorias) {
+            $scope.categorias = categorias;
+        });
 
         var pegaMesAno = function () {
             $scope.filtro.FilterMes = $scope.dataAtual.getMonth();
@@ -60,10 +64,27 @@
             }
         };
 
+        $scope.pagamentosPorCategoria = [];
+
         //Pegar Pagamentos 
         var onPegaPagamentosComplete = function (data) {
             $scope.pagamentos = data;
             $scope.carregado = { display: 'block' };
+
+            angular.forEach(data, function (pagamentos) {
+
+                var valor = pagamentos.Valor;
+                var categoria = pagamentos.Compra.Categoria;
+                
+                if (categoria != null) {
+                    $scope.pagamentosPorCategoria[categoria.NomeCategoria];
+                }
+
+                
+
+
+            });
+
             $scope.pegaParcelasVencendo = function () {
                 var ultimasParcelas = $.grep($scope.pagamentos, function (valor) {
                     return valor.Parcela == valor.Compra.Parcelas && valor.Compra.Parcelas > 1;
@@ -89,14 +110,18 @@
         };
 
 
-        $scope.pegarTotal = function (formaPagamentoID) {
-            var pagamentoPorFormaPagamento = $scope.pagamentos;
+        $scope.pegarTotal = function (propriedade, valorProp) {
+            var pagamentos = $scope.pagamentos;
 
-            if (typeof (formaPagamentoID) != 'undefined')
-                var pagamentoPorFormaPagamento = $filter('filter')(pagamentoPorFormaPagamento, { Compra: { FormaPagamentoID: formaPagamentoID } });
+            if (typeof (pagamentos) != 'undefined' && typeof (valorProp) != 'undefined' && valorProp != null) {
+                var pagamentos = $.grep(pagamentos, function (valor) {
+                    return valor['Compra'][propriedade] == valorProp;
+                });
+            }
+                
             var soma = 0;
 
-            angular.forEach(pagamentoPorFormaPagamento, function (valor) {
+            angular.forEach(pagamentos, function (valor) {
                 soma += parseFloat(valor.Valor);
             });
 
@@ -108,5 +133,5 @@
 
     };
 
-    App.controller("PagamentoController", ["$scope", "$filter", "pagamentoServ", "formaPagamentoServ", PagamentoController]);
+    App.controller("PagamentoController", ["$scope", "$filter", "pagamentoServ", "formaPagamentoServ", "categoriaServ", PagamentoController]);
 })();

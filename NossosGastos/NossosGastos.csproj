@@ -15,7 +15,7 @@
     <AssemblyName>NossosGastos</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -144,11 +144,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\FormaPagamentoController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Filtro\Filtros.cs" />
     <Compile Include="Filtro\IFiltro.cs" />
+    <Compile Include="Filtro\Implementacoes\FiltroCategoria.cs" />
     <Compile Include="Filtro\Implementacoes\FiltroPagamento.cs" />
     <Compile Include="Filtro\Implementacoes\FiltroCompra.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,6 +189,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\Angular\CustomDirectives\CurrencyInput.js" />
     <Content Include="Scripts\Angular\CustomDirectives\defaultForm.js" />
+    <Content Include="Scripts\Angular\Models\Categoria\categoriaFormCtrl.js" />
+    <Content Include="Scripts\Angular\Models\Categoria\categoriaCtrl.js" />
+    <Content Include="Scripts\Angular\Models\Categoria\categoriaServ.js" />
     <Content Include="Scripts\Angular\Models\Compra\comprasCtrl.js" />
     <Content Include="Scripts\Angular\Models\Compra\compraServ.js" />
     <Content Include="Scripts\Angular\Models\FormaPagamento\formaPagamentoFormCtrl.js" />
@@ -1059,6 +1064,7 @@
     <Content Include="Views\Pagamento\Index.cshtml" />
     <Content Include="Views\FormaPagamento\FormFormaPagamento.cshtml" />
     <Content Include="Views\FormaPagamento\Index.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1100,7 +1106,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>31653</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://pessi.com</IISUrl>
+          <IISUrl>http://localhost:31653/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
