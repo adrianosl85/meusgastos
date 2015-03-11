@@ -21,11 +21,15 @@ namespace NossosGastos.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Menu = "formaPagamento";
+
             return View();
         }
 
         public ActionResult FormFormaPagamento()
         {
+            ViewBag.Menu = "formaPagamento";
+
             return View();
         }
 

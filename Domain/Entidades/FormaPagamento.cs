@@ -16,6 +16,7 @@ namespace Dominio.Entidades
         public bool TemVencimento { get; set; }
         public int DiaVencimento { get; set; }
         public ICollection<Compra> Compras { get; set; }
+        public string Icone { get; set; }
 
         public FormaPagamento()
         {

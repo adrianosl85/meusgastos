@@ -27,11 +27,14 @@ namespace NossosGastos.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Menu = "compra";
             return View();
         }
 
         public ActionResult FormCompra()
         {
+            ViewBag.Menu = "compra";
+
             return View();
         }
 

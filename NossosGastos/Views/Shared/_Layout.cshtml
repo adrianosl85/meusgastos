@@ -15,11 +15,15 @@
     <div class="navbar">
         <div class="navbar-inner">
             <a class="brand" href="#">Pessi.com</a>
+            
             <ul class="nav">
-                <li class="active"><a href="/Pagamento" class="success">Pagamentos</a></li>
-                <li><a href="/Compra">Compras</a></li>
-                <li><a href="/FormaPagamento">Formas de Pagamento</a></li>
-                <li><a href="/Categoria">Categorias</a></li>
+                <li @(ViewBag.Menu == "pagamento" ? "class=active" : "")><a href="/Pagamento" class="success">Pagamentos</a></li>
+                <li @( ViewBag.Menu == "compra" ? "class=active" : "")><a href="/Compra">Compras</a></li>
+
+                <li @( ViewBag.Menu == "formaPagamento" ? "class=active" : "")><a href="/FormaPagamento">Formas de Pagamento</a></li>
+
+                <li @( ViewBag.Menu == "categoria" ? "class=active" : "")><a href="/Categoria">Categorias</a></li>
+
             </ul>
         </div>
     </div>

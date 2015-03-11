@@ -17,5 +17,6 @@ namespace Dominio.Entidades
         public int? CategoriaPaiID { get; set; }
         [ForeignKey("CategoriaPaiID")]
         public Categoria CategoriaPai { get; set; }
+        public string Icone { get; set; }
     }
 }

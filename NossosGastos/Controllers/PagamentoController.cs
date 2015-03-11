@@ -26,6 +26,8 @@ namespace NossosGastos.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Menu = "pagamento";
+
             return View();
         }
 

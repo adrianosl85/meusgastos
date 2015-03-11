@@ -20,6 +20,8 @@ namespace Dominio.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Menu = "categoria";
+
             return View();
         }
 

@@ -111,7 +111,7 @@
 
 
         $scope.pegarTotal = function (propriedade, valorProp) {
-            var pagamentos = $scope.pagamentos;
+            var pagamentos =  $scope.pagamentos;
 
             if (typeof (pagamentos) != 'undefined' && typeof (valorProp) != 'undefined' && valorProp != null) {
                 var pagamentos = $.grep(pagamentos, function (valor) {
