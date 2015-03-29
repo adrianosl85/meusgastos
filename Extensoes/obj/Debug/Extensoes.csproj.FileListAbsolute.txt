@@ -4,3 +4,10 @@ C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\bi
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\bin\Debug\Newtonsoft.Json.xml
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.dll
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Extensoes\obj\Debug\Extensoes.pdb
+E:\adrianoGit\meusgastos\Extensoes\bin\Debug\Extensoes.dll
+E:\adrianoGit\meusgastos\Extensoes\bin\Debug\Extensoes.pdb
+E:\adrianoGit\meusgastos\Extensoes\bin\Debug\Newtonsoft.Json.dll
+E:\adrianoGit\meusgastos\Extensoes\bin\Debug\Newtonsoft.Json.xml
+E:\adrianoGit\meusgastos\Extensoes\obj\Debug\Extensoes.csprojResolveAssemblyReference.cache
+E:\adrianoGit\meusgastos\Extensoes\obj\Debug\Extensoes.dll
+E:\adrianoGit\meusgastos\Extensoes\obj\Debug\Extensoes.pdb

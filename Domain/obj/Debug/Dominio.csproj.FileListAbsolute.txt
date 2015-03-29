@@ -10,3 +10,14 @@ C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Domain\bin\D
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Domain\obj\Debug\Domain.dll
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Domain\obj\Debug\Domain.pdb
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Domain\obj\Debug\Dominio.csprojResolveAssemblyReference.cache
+E:\adrianoGit\meusgastos\Domain\bin\Debug\Domain.dll.config
+E:\adrianoGit\meusgastos\Domain\bin\Debug\Domain.dll
+E:\adrianoGit\meusgastos\Domain\bin\Debug\Domain.pdb
+E:\adrianoGit\meusgastos\Domain\bin\Debug\EntityFramework.dll
+E:\adrianoGit\meusgastos\Domain\bin\Debug\EntityFramework.SqlServer.dll
+E:\adrianoGit\meusgastos\Domain\bin\Debug\MySql.Data.Entity.EF6.dll
+E:\adrianoGit\meusgastos\Domain\bin\Debug\EntityFramework.xml
+E:\adrianoGit\meusgastos\Domain\bin\Debug\EntityFramework.SqlServer.xml
+E:\adrianoGit\meusgastos\Domain\obj\Debug\Dominio.csprojResolveAssemblyReference.cache
+E:\adrianoGit\meusgastos\Domain\obj\Debug\Domain.dll
+E:\adrianoGit\meusgastos\Domain\obj\Debug\Domain.pdb

@@ -3,3 +3,8 @@ C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\bi
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.csprojResolveAssemblyReference.cache
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.dll
 C:\Users\adriano\Documents\Visual Studio 2013\Projects\NossosGastos\Expressao\obj\Debug\Expressao.pdb
+E:\adrianoGit\meusgastos\Expressao\bin\Debug\Expressao.dll
+E:\adrianoGit\meusgastos\Expressao\bin\Debug\Expressao.pdb
+E:\adrianoGit\meusgastos\Expressao\obj\Debug\Expressao.csprojResolveAssemblyReference.cache
+E:\adrianoGit\meusgastos\Expressao\obj\Debug\Expressao.dll
+E:\adrianoGit\meusgastos\Expressao\obj\Debug\Expressao.pdb
